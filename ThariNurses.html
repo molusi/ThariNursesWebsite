@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thari Beyond — Nurses Beyond the Bedside</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --cream: #fdf8f4;
+      --warm-white: #faf5f0;
+      --champagne: #eeddd0;
+      --gold: #c9a882;         /* rose-gold / taupe from logo circle */
+      --gold-light: #d4b896;
+      --gold-shine: #e8cdb5;
+      --gold-accent: #b8924a;  /* true gold for star/heart accents */
+      --brown: #3a2318;        /* deep charcoal-brown */
+      --brown-dark: #1c110a;   /* near-black */
+      --brown-medium: #7a5c45;
+      --taupe: #c4a882;
+      --taupe-light: #dcc9b0;
+      --dark: #0e0907;
+      --text: #1c110a;
+      --text-light: #5a3e2b;
+      --text-muted: #9b8070;
+      --white: #ffffff;
+      --card-bg: #fefcfa;
+      --border: rgba(180,145,110,0.18);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .display { font-family: 'Cormorant Garamond', serif; }
+
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+    em { font-style: italic; color: var(--gold); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(253,250,247,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(180,145,110,0.14);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 0.9rem 4rem;
+      background: rgba(253,250,247,0.98);
+      box-shadow: 0 2px 30px rgba(28,17,10,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--brown-dark); text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      text-decoration: none; color: var(--text-light);
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--white) !important;
+      padding: 0.6rem 1.3rem;
+      border-radius: 2px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--brown) !important; }
+
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; flex-direction: column; gap: 5px; padding: 4px;
+    }
+
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--brown-dark); transition: all 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+    }
+
+    /* Subtle linen texture */
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(180,145,110,0.025) 40px, rgba(180,145,110,0.025) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(180,145,110,0.02) 40px, rgba(180,145,110,0.02) 41px);
+      pointer-events: none;
+    }
+
+    /* Left text panel */
+    .hero-left {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 10rem 5rem 6rem 6rem;
+      position: relative; z-index: 2;
+    }
+
+    /* Vertical gold rule on left edge */
+    .hero-left::before {
+      content: '';
+      position: absolute; left: 0; top: 15%; bottom: 15%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(184,146,74,0.4) 30%, rgba(184,146,74,0.4) 70%, transparent 100%);
+    }
+
+    /* Right image panel */
+    .hero-right {
+      position: relative; display: flex;
+      align-items: center; justify-content: center;
+      background: linear-gradient(145deg, #f5ede2 0%, #eeddd0 60%, #e8d4c4 100%);
+      overflow: hidden;
+    }
+
+    /* Decorative botanical SVG background on right */
+    .hero-right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,168,130,0.1) 0%, transparent 70%);
+    }
+
+    /* Corner botanical ornament lines */
+    .hero-right-deco {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+
+    .hero-logo-wrap {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-logo-circle {
+      position: relative;
+      width: 340px; height: 340px;
+    }
+
+    .hero-logo-circle img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      display: block;
+      filter: drop-shadow(0 20px 60px rgba(28,17,10,0.12));
+    }
+
+    /* Thin rose-gold ring around logo */
+    .hero-logo-circle::before {
+      content: '';
+      position: absolute; inset: -10px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,146,74,0.35);
+      pointer-events: none;
+    }
+
+    .hero-logo-circle::after {
+      content: '';
+      position: absolute; inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,146,74,0.15);
+      pointer-events: none;
+    }
+
+    /* Gold 8-point star — top right of logo circle */
+    .hero-star {
+      position: absolute;
+      top: -8px; right: -2px;
+      width: 44px; height: 44px;
+    }
+
+    .hero-tagline-block {
+      text-align: center;
+    }
+
+    .hero-logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--brown-dark); margin-bottom: 0.3rem;
+    }
+
+    .hero-logo-sub {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .hero-logo-sub::before,
+    .hero-logo-sub::after {
+      content: ''; flex: 1; max-width: 36px; height: 1px;
+      background: var(--gold); opacity: 0.5;
+    }
+
+    /* Left panel text */
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-accent); margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow-line {
+      width: 28px; height: 1px; background: var(--gold-accent); opacity: 0.6;
+    }
+
+    h1.hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 5.5vw, 6rem);
+      line-height: 1.0;
+      color: var(--brown-dark);
+      font-weight: 300;
+      margin-bottom: 0.2rem;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+
+    h1.hero-h1 em {
+      font-style: italic;
+      color: var(--gold-accent);
+      display: block;
+    }
+
+    .hero-divider {
+      width: 3rem; height: 1px;
+      background: linear-gradient(90deg, var(--gold-accent), transparent);
+      margin: 1.8rem 0;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--text-muted);
+      max-width: 400px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+
+    .hero-community-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(201,168,130,0.1);
+      border: 1px solid rgba(201,168,130,0.3);
+      color: var(--brown-medium); font-size: 0.82rem;
+      padding: 0.45rem 1rem; border-radius: 50px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    .hero-community-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold-accent);
+      box-shadow: 0 0 6px rgba(184,146,74,0.5);
+      animation: pulse 2s infinite;
+    }
+
+    .hero-buttons {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.9s 0.45s ease both;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background: var(--brown-dark);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: all 0.25s; display: inline-block;
+      border: 1px solid var(--brown-dark);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--brown-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(28,17,10,0.25);
+      color: var(--text);
+      padding: 0.9rem 2.2rem;
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: all 0.25s; display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+    }
+
+    .hero-book-tease {
+      animation: fadeUp 0.9s 0.6s ease both;
+    }
+
+    .hero-book-tease a {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      letter-spacing: 0.03em; transition: color 0.2s;
+      border-bottom: 1px solid rgba(155,128,112,0.3);
+      padding-bottom: 2px;
+    }
+
+    .hero-book-tease a:hover { color: var(--gold-accent); border-color: var(--gold-accent); }
+
+    /* ===== COMMUNITY BANNER ===== */
+    #community-banner {
+      background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown) 100%);
+      padding: 2.5rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+
+    .banner-text h2 {
+      font-size: 1.8rem; color: var(--white); font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .banner-text p { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+
+    .banner-stat {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 600; color: var(--white);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.75);
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 6rem 4rem; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold-accent); font-weight: 500;
+      border-bottom: 1px solid var(--gold-accent);
+      padding-bottom: 0.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: var(--brown-dark);
+    }
+
+    .section-intro {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--text-muted); max-width: 560px;
+    }
+
+    .divider {
+      width: 3rem; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      background: var(--warm-white);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-logo-frame {
+      width: 100%;
+      max-width: 420px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .about-logo-frame img {
+      width: 100%; height: auto;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .about-accent-box {
+      position: absolute;
+      bottom: -2rem; right: -2rem;
+      width: 120px; height: 120px;
+      border: 1px solid rgba(180,145,110,0.25);
+      border-radius: 2px;
+    }
+
+    .about-accent-box::before {
+      content: '✦';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--gold-accent); font-size: 2rem;
+      opacity: 0.4;
+    }
+
+    .about-text-col .section-tag { color: var(--gold-accent); border-color: var(--gold-accent); }
+
+    .about-text-col .section-title { color: var(--brown-dark); }
+
+    .about-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic;
+      color: var(--text-light); line-height: 1.6;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-body {
+      font-size: 0.9rem; line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .about-pillars {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem;
+    }
+
+    .pillar {
+      background: var(--champagne);
+      border: 1px solid rgba(180,145,110,0.18);
+      padding: 1.2rem; border-radius: 2px;
+    }
+
+    .pillar h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--brown-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ===== COMMUNITY SECTION ===== */
+    #community {
+      background: var(--champagne);
+      text-align: center;
+    }
+
+    .community-inner { max-width: 700px; margin: 0 auto; }
+
+    .community-emoji {
+      font-size: 3rem; margin-bottom: 1rem;
+      display: block;
+    }
+
+    .community-body {
+      font-size: 1rem; line-height: 1.9; color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+
+    .community-perks {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; text-align: left; margin-bottom: 2.5rem;
+    }
+
+    .perk {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.2rem 1.5rem;
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+
+    .perk-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+    .perk-text strong {
+      display: block; font-size: 0.85rem;
+      font-weight: 500; color: var(--brown-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .perk-text span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ===== PACKAGES ===== */
+    #packages { background: var(--cream); }
+
+    .packages-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+
+    .pkg-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .pkg-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(107,63,31,0.12);
+    }
+
+    .pkg-card.featured {
+      border-color: var(--gold);
+      background: var(--brown-dark);
+      position: relative;
+    }
+
+    .pkg-badge {
+      background: var(--gold-accent);
+      color: var(--white);
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.35rem 1rem; text-align: center;
+    }
+
+    .pkg-body { padding: 2rem; }
+
+    .pkg-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; color: var(--gold);
+      letter-spacing: 0.1em; margin-bottom: 0.8rem;
+    }
+
+    .pkg-card h3 {
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--brown-dark); margin-bottom: 0.3rem;
+    }
+
+    .pkg-card.featured h3 { color: var(--cream); }
+
+    .pkg-card.featured .pkg-num { color: var(--gold-light); }
+
+    .pkg-tagline {
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-bottom: 1.5rem; line-height: 1.5;
+    }
+
+    .pkg-card.featured .pkg-tagline { color: rgba(232,213,183,0.6); }
+
+    .pkg-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 600;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+
+    .pkg-price span { font-size: 1rem; font-weight: 300; color: var(--text-muted); }
+
+    .pkg-card.featured .pkg-price { color: var(--gold-light); }
+
+    .pkg-features { list-style: none; margin-bottom: 2rem; }
+
+    .pkg-features li {
+      display: flex; gap: 0.7rem; align-items: flex-start;
+      font-size: 0.82rem; color: var(--text-light);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(184,146,74,0.08);
+    }
+
+    .pkg-card.featured .pkg-features li { color: rgba(232,213,183,0.7); border-color: rgba(184,146,74,0.1); }
+
+    .pkg-features li::before {
+      content: '✓'; color: var(--gold);
+      font-weight: 500; flex-shrink: 0;
+    }
+
+    .pkg-bonus {
+      background: rgba(184,146,74,0.06);
+      border: 1px dashed rgba(184,146,74,0.3);
+      border-radius: 2px; padding: 0.8rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem; color: var(--text-muted);
+    }
+
+    .pkg-bonus strong { color: var(--gold); display: block; margin-bottom: 0.3rem; }
+
+    .pkg-card.featured .pkg-bonus {
+      background: rgba(184,146,74,0.08);
+      border-color: rgba(184,146,74,0.2);
+    }
+
+    .pkg-card.featured .pkg-bonus strong { color: var(--gold-light); }
+
+    .pkg-card.featured .pkg-bonus { color: rgba(232,213,183,0.6); }
+
+    .btn-pkg {
+      display: block; text-align: center;
+      padding: 0.85rem; border-radius: 2px;
+      font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+    }
+
+    .btn-pkg-gold {
+      background: var(--gold); color: var(--white);
+    }
+
+    .btn-pkg-gold:hover { background: var(--brown); }
+
+    .btn-pkg-outline {
+      border: 1px solid var(--gold); color: var(--gold);
+    }
+
+    .btn-pkg-outline:hover { background: var(--gold); color: var(--white); }
+
+    /* ===== CAREERS ===== */
+    #careers { background: var(--warm-white); }
+
+    .careers-intro-row {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .career-tabs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.55rem 1.2rem;
+      border-radius: 2px; font-size: 0.78rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--brown-dark); border-color: var(--brown-dark);
+      color: var(--white);
+    }
+
+    .careers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .career-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.8rem;
+      transition: all 0.25s;
+    }
+
+    .career-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(184,146,74,0.1);
+    }
+
+    .career-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+
+    .career-card h3 {
+      font-size: 1.2rem; color: var(--brown-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .career-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+
+    .expand-btn {
+      background: none; border: none;
+      color: var(--gold); font-size: 0.78rem;
+      letter-spacing: 0.05em; cursor: pointer;
+      text-transform: uppercase; padding: 0;
+    }
+
+    .career-details { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+    .career-details.open { display: block; }
+
+    .career-detail-section { margin-bottom: 1rem; }
+
+    .career-detail-section h5 {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+
+    .career-detail-section ul { list-style: none; }
+
+    .career-detail-section li {
+      font-size: 0.78rem; color: var(--text-light);
+      padding: 0.25rem 0; padding-left: 1rem;
+      position: relative; line-height: 1.5;
+    }
+
+    .career-detail-section li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold); font-size: 0.7rem;
+    }
+
+    .career-card.hidden { display: none; }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--champagne); }
+
+    #services .section-tag { color: var(--gold-accent); border-color: var(--gold-accent); }
+
+    #services .section-title { color: var(--brown-dark); }
+
+    #services .section-intro { color: var(--text-muted); }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem; margin-top: 3rem;
+    }
+
+    .svc-card {
+      background: var(--white);
+      border: 1px solid rgba(180,145,110,0.2);
+      border-radius: 4px; padding: 2rem 1.5rem;
+      transition: all 0.25s;
+    }
+
+    .svc-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(28,17,10,0.07);
+    }
+
+    .svc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300;
+      color: rgba(180,145,110,0.3); line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .svc-card h3 {
+      font-size: 1.1rem; color: var(--brown-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .svc-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.2rem; }
+
+    .svc-link {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold-accent); text-decoration: none;
+      border-bottom: 1px solid rgba(184,146,74,0.4);
+      padding-bottom: 2px; transition: border-color 0.2s;
+    }
+
+    .svc-link:hover { border-color: var(--gold-accent); }
+
+    /* ===== COACHING PACKAGE ===== */
+    #coaching {
+      background: linear-gradient(160deg, var(--brown-dark) 0%, var(--brown) 100%);
+    }
+
+    .coaching-inner {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 5rem; align-items: center;
+    }
+
+    .coaching-text .section-title { font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--cream); }
+
+    .coaching-text .section-tag { color: var(--gold-light); border-color: var(--gold-light); }
+
+    .coaching-features { margin-top: 2rem; }
+
+    .coaching-feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid rgba(201,168,130,0.12);
+    }
+
+    .coaching-feature:last-child { border-bottom: none; }
+
+    .cf-icon {
+      width: 40px; height: 40px; border-radius: 2px;
+      background: rgba(201,168,130,0.1);
+      border: 1px solid rgba(201,168,130,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    .cf-text strong { display: block; font-size: 0.88rem; color: var(--cream); margin-bottom: 0.3rem; }
+
+    .cf-text span { font-size: 0.78rem; color: rgba(201,168,130,0.6); line-height: 1.6; }
+
+    .coaching-card {
+      background: var(--brown-dark);
+      border-radius: 6px; padding: 3rem;
+      border: 1px solid rgba(184,146,74,0.2);
+      position: relative; overflow: hidden;
+    }
+
+    .coaching-card::before {
+      content: '';
+      position: absolute; top: -3rem; right: -3rem;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,146,74,0.12) 0%, transparent 70%);
+    }
+
+    .coaching-card-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .coaching-card h3 {
+      font-size: 1.8rem; color: var(--cream); margin-bottom: 0.5rem;
+    }
+
+    .coaching-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 600;
+      color: var(--gold-light); line-height: 1;
+      margin: 1rem 0;
+    }
+
+    .coaching-card-price small {
+      font-size: 1.1rem; font-weight: 300;
+      color: rgba(184,146,74,0.6);
+    }
+
+    .coaching-includes {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.5rem; margin: 1.5rem 0;
+    }
+
+    .ci-item {
+      background: rgba(184,146,74,0.07);
+      border: 1px solid rgba(184,146,74,0.12);
+      padding: 0.7rem 0.9rem; border-radius: 2px;
+      font-size: 0.75rem; color: rgba(232,213,183,0.7);
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+
+    .ci-item::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+
+    /* ===== PARTNER / TIKTOK ===== */
+    #partner { background: var(--warm-white); }
+
+    .partner-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start; margin-top: 3rem;
+    }
+
+    .partner-intro-text {
+      font-size: 0.9rem; color: var(--text-light);
+      line-height: 1.85; margin-bottom: 1.5rem;
+    }
+
+    .partner-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 2rem;
+    }
+
+    .p-stat {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 2px; padding: 1.2rem;
+      text-align: center;
+    }
+
+    .p-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600;
+      color: var(--brown-dark); display: block;
+    }
+
+    .p-stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+    .live-block {
+      background: var(--brown-dark);
+      border-radius: 4px; padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .live-dot-wrap { position: relative; flex-shrink: 0; padding-top: 4px; }
+
+    .live-indicator {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #e84545; box-shadow: 0 0 10px #e84545;
+      animation: pulse 1.5s infinite;
+    }
+
+    .live-block p { font-size: 0.82rem; color: rgba(232,213,183,0.7); line-height: 1.75; }
+
+    .live-block strong { color: var(--gold-light); }
+
+    .partner-tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .ptag {
+      background: rgba(184,146,74,0.08);
+      border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.75rem;
+      padding: 0.35rem 0.8rem; border-radius: 2px;
+    }
+
+    .partner-pkg {
+      background: var(--brown-dark);
+      border-radius: 6px; padding: 2.5rem;
+      border: 1px solid rgba(184,146,74,0.2);
+    }
+
+    .partner-pkg-badge {
+      background: var(--gold); color: var(--white);
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 2px;
+      display: inline-block; margin-bottom: 1.2rem;
+    }
+
+    .partner-pkg h3 { font-size: 1.5rem; color: var(--cream); margin-bottom: 0.3rem; }
+
+    .partner-pkg-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 600;
+      color: var(--gold-light); margin: 1rem 0;
+    }
+
+    .partner-pkg-price span { font-size: 1rem; color: rgba(184,146,74,0.5); }
+
+    .partner-pkg ul { list-style: none; margin-bottom: 2rem; }
+
+    .partner-pkg li {
+      font-size: 0.82rem; color: rgba(232,213,183,0.65);
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(184,146,74,0.08);
+      display: flex; gap: 0.7rem;
+    }
+
+    .partner-pkg li::before { content: '✓'; color: var(--gold); flex-shrink: 0; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--warm-white); }
+
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+
+    .tcard {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 2rem;
+      transition: all 0.25s;
+    }
+
+    .tcard:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+
+    .tcard blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-style: italic;
+      color: var(--text); line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .tcard-author { display: flex; gap: 0.8rem; align-items: center; }
+
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--brown-medium) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 500; color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .author-info strong { display: block; font-size: 0.85rem; color: var(--brown-dark); }
+
+    .author-info span { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--brown-dark); }
+
+    #contact .section-tag { color: var(--gold-light); border-color: var(--gold-light); }
+
+    #contact .section-title { color: var(--cream); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; margin-top: 3rem;
+    }
+
+    .contact-intro { font-size: 0.9rem; color: rgba(232,213,183,0.65); line-height: 1.8; margin-bottom: 2rem; }
+
+    .contact-opt {
+      display: flex; gap: 1rem; align-items: center;
+      padding: 1.1rem 1.2rem;
+      background: rgba(184,146,74,0.06);
+      border: 1px solid rgba(184,146,74,0.15);
+      border-radius: 2px; margin-bottom: 0.8rem;
+      text-decoration: none; transition: all 0.2s;
+    }
+
+    .contact-opt:hover {
+      background: rgba(184,146,74,0.1);
+      border-color: rgba(184,146,74,0.3);
+      transform: translateX(4px);
+    }
+
+    .contact-opt-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    .contact-opt-text strong { display: block; font-size: 0.85rem; color: var(--cream); margin-bottom: 0.2rem; }
+
+    .contact-opt-text span { font-size: 0.75rem; color: rgba(232,213,183,0.5); }
+
+    .contact-form {
+      background: rgba(184,146,74,0.04);
+      border: 1px solid rgba(184,146,74,0.12);
+      border-radius: 4px; padding: 2.5rem;
+    }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(232,213,183,0.5); margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: rgba(184,146,74,0.05);
+      border: 1px solid rgba(184,146,74,0.15);
+      border-radius: 2px; padding: 0.75rem 1rem;
+      font-size: 0.85rem; color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(232,213,183,0.25); }
+
+    .form-group select option { background: var(--brown-dark); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: rgba(184,146,74,0.4); }
+
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--white);
+      border: none; border-radius: 2px;
+      padding: 1rem;
+      font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.25s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-submit:hover { background: var(--gold-light); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f0804;
+      padding: 3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    footer p { font-size: 0.75rem; color: rgba(232,213,183,0.35); }
+
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(232,213,183,0.4); text-decoration: none; transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy { font-size: 0.72rem; color: rgba(232,213,183,0.25); }
+
+    /* ===== BOOK COMING SOON ===== */
+    #book {
+      background: var(--cream);
+      text-align: center;
+      padding: 6rem 4rem;
+    }
+
+    .book-inner { max-width: 800px; margin: 0 auto; }
+
+    .book-coming-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(184,146,74,0.1);
+      border: 1px solid rgba(184,146,74,0.3);
+      color: var(--gold-accent);
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .book-coming-label::before { content: '📖'; }
+
+    .book-title-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--brown-dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .book-title-display em { color: var(--gold-accent); font-style: italic; }
+
+    .book-desc {
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--text-muted); max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .book-mockup {
+      position: relative; display: inline-block;
+      margin: 2rem auto 3rem;
+    }
+
+    .book-notify-box {
+      background: var(--white);
+      border: 1px solid rgba(180,145,110,0.2);
+      border-radius: 4px; padding: 2rem 2.5rem;
+      max-width: 480px; margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(28,17,10,0.05);
+    }
+
+    .book-notify-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: var(--brown-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .book-notify-box p {
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .book-notify-row {
+      display: flex; gap: 0.6rem;
+    }
+
+    .book-notify-input {
+      flex: 1;
+      background: var(--warm-white);
+      border: 1px solid rgba(180,145,110,0.25);
+      border-radius: 2px; padding: 0.7rem 1rem;
+      font-size: 0.82rem; color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+    }
+
+    .book-notify-input::placeholder { color: var(--text-muted); opacity: 0.6; }
+
+    .book-notify-input:focus { border-color: var(--gold); }
+
+    .btn-notify {
+      background: var(--brown-dark); color: var(--white);
+      border: none; border-radius: 2px;
+      padding: 0.7rem 1.3rem;
+      font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      white-space: nowrap; transition: background 0.2s;
+    }
+
+    .btn-notify:hover { background: var(--brown); }
+
+    /* ===== BOOK COMING SOON ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .packages-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .careers-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 1.5rem; }
+      #home {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        min-height: auto;
+      }
+      .hero-left {
+        padding: 8rem 2rem 3rem;
+        order: 2;
+      }
+      .hero-left::before { display: none; }
+      .hero-right {
+        order: 1;
+        min-height: 55vw;
+        padding: 3rem 2rem 2rem;
+      }
+      .hero-logo-circle { width: 220px; height: 220px; }
+      .hero-star { width: 30px; height: 30px; }
+      #about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-logo-frame { max-width: 280px; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .careers-grid { grid-template-columns: 1fr; }
+      .careers-intro-row { flex-direction: column; align-items: flex-start; }
+      .coaching-inner { grid-template-columns: 1fr; }
+      .partner-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      #community-banner { padding: 2rem 1.5rem; flex-direction: column; }
+      .banner-stat { gap: 2rem; }
+      footer { flex-direction: column; padding: 2rem 1.5rem; }
+      .community-perks { grid-template-columns: 1fr; }
+      .partner-stats { grid-template-columns: repeat(3, 1fr); }
+      .coaching-includes { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .partner-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <img src="logo.jpeg" alt="Thari Beyond" style="height:38px; width:38px; border-radius:50%; object-fit:cover; margin-right:0.6rem; vertical-align:middle; display:inline-block;">
+    Thari <span>Beyond</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#book">📖 Book</a></li>
+    <li><a href="#partner">Partner</a></li>
+    <li><a href="#contact" class="nav-cta">Connect With Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+
+  <!-- LEFT TEXT PANEL -->
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      For nurses who want more
+      <span class="hero-eyebrow-line"></span>
+    </div>
+
+    <h1 class="hero-h1">Nurses<br>Beyond<br><em>the Bedside</em></h1>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-subtitle">A growing community of 100+ nurses navigating careers beyond the bedside. Career guidance, job opportunities, and a sisterhood of like-minded professionals — all in one place.</p>
+
+    <div class="hero-community-badge">
+      <div class="dot"></div>
+      100+ Nurses &amp; Growing
+    </div>
+
+    <div class="hero-buttons">
+      <a href="#packages" class="btn-primary">View Packages</a>
+      <a href="#community" class="btn-outline">Join the Community</a>
+    </div>
+
+    <div class="hero-book-tease">
+      <a href="#book">✦ &nbsp;Book coming soon — be the first to know</a>
+    </div>
+  </div>
+
+  <!-- RIGHT IMAGE PANEL -->
+  <div class="hero-right">
+    <svg class="hero-right-deco" viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g opacity="0.42" stroke="#c9a055" fill="#e8d5bf" stroke-width="0.8">
+        <path d="M30,60 Q10,110 30,160 Q55,120 55,75 Z"/>
+        <path d="M30,60 Q30,110 30,160" fill="none" stroke-width="0.5"/>
+        <path d="M55,40 Q38,85 45,130 Q68,98 70,58 Z"/>
+        <path d="M75,25 Q62,65 65,105 Q85,80 86,44 Z"/>
+        <path d="M90,18 Q80,45 76,28" fill="none" stroke-width="1"/>
+      </g>
+      <g opacity="0.42" stroke="#c9a055" fill="#e8d5bf" stroke-width="0.8" transform="translate(600,0) scale(-1,1)">
+        <path d="M30,60 Q10,110 30,160 Q55,120 55,75 Z"/>
+        <path d="M30,60 Q30,110 30,160" fill="none" stroke-width="0.5"/>
+        <path d="M55,40 Q38,85 45,130 Q68,98 70,58 Z"/>
+        <path d="M75,25 Q62,65 65,105 Q85,80 86,44 Z"/>
+      </g>
+      <g opacity="0.35" stroke="#c9a055" fill="#e8d5bf" stroke-width="0.7" transform="translate(0,900) scale(1,-1)">
+        <path d="M30,60 Q10,110 30,160 Q55,120 55,75 Z"/>
+        <path d="M30,60 Q30,110 30,160" fill="none" stroke-width="0.5"/>
+        <path d="M55,40 Q38,85 45,130 Q68,98 70,58 Z"/>
+        <path d="M75,25 Q62,65 65,105 Q85,80 86,44 Z"/>
+      </g>
+      <g opacity="0.35" stroke="#c9a055" fill="#e8d5bf" stroke-width="0.7" transform="translate(600,900) scale(-1,-1)">
+        <path d="M30,60 Q10,110 30,160 Q55,120 55,75 Z"/>
+        <path d="M30,60 Q30,110 30,160" fill="none" stroke-width="0.5"/>
+        <path d="M55,40 Q38,85 45,130 Q68,98 70,58 Z"/>
+      </g>
+      <circle cx="300" cy="450" r="230" fill="none" stroke="#c9a055" stroke-width="0.6" opacity="0.2"/>
+      <circle cx="300" cy="450" r="268" fill="none" stroke="#c9a055" stroke-width="0.3" opacity="0.1"/>
+    </svg>
+
+    <div class="hero-logo-wrap">
+      <svg class="hero-star" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+        <line x1="22" y1="2" x2="22" y2="42" stroke="#b8924a" stroke-width="2" stroke-linecap="round"/>
+        <line x1="2" y1="22" x2="42" y2="22" stroke="#b8924a" stroke-width="2" stroke-linecap="round"/>
+        <line x1="8" y1="8" x2="36" y2="36" stroke="#b8924a" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="36" y1="8" x2="8" y2="36" stroke="#b8924a" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="2.8" fill="#d4a853"/>
+      </svg>
+
+      <div class="hero-logo-circle">
+        <img src="logo.jpeg" alt="Thari Beyond — Nurses Beyond the Bedside Towards the Future">
+      </div>
+
+      <div class="hero-tagline-block">
+        <div class="hero-logo-name">Thari Beyond</div>
+        <div class="hero-logo-sub">Nurses Beyond the Bedside</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- COMMUNITY BANNER -->
+<div id="community-banner">
+  <div class="banner-text">
+    <h2>Welcome to the community</h2>
+    <p>Whether you're considering a career transition or simply looking for support and direction — we're here.</p>
+  </div>
+  <div class="banner-stat">
+    <div class="stat-item">
+      <span class="stat-num">100+</span>
+      <span class="stat-label">Nurses in community</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1,500</span>
+      <span class="stat-label">Live viewers / session</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">2×</span>
+      <span class="stat-label">Lives per week</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-logo-frame">
+      <img src="1778961795827_front.jpeg" alt="Thari Beyond logo — Nurses Beyond the Bedside Towards the Future">
+    </div>
+    <div class="about-accent-box"></div>
+  </div>
+  <div class="about-text-col reveal">
+    <span class="section-tag">Our Story</span>
+    <h2 class="section-title" style="color:var(--cream)">Born from <em>experience,</em><br>built with heart</h2>
+    <div class="divider"></div>
+    <div class="about-quote">"I know what it feels like to love nursing and still feel trapped."</div>
+    <p class="about-body">Thari Nurses Group was founded by a qualified midwife with experience across private, public, and retail healthcare. After years of witnessing talented nurses burn out or feel stuck, Sister Lesego built this platform to open the door to a world of possibilities — all rooted in the skills you already have.</p>
+    <p class="about-body">From clinical floors to corporate boardrooms, telehealth to wellness coaching — your nursing qualification is more powerful than you know. This community exists to help you see that, and act on it.</p>
+    <div class="about-pillars">
+      <div class="pillar">
+        <h4>Our Mission</h4>
+        <p>To guide nurses toward fulfilling, sustainable careers that honour their skills without burning them out.</p>
+      </div>
+      <div class="pillar">
+        <h4>Our Vision</h4>
+        <p>A world where every nurse knows their worth and has the tools to thrive beyond the bedside.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="community-inner reveal">
+    <span class="community-emoji">🫶🏾</span>
+    <span class="section-tag">The Community</span>
+    <h2 class="section-title">Join a growing community<br>of <em>100+ nurses</em></h2>
+    <div class="divider" style="margin: 1.2rem auto;"></div>
+    <p class="community-body">Thari Nurses Group is a supportive space designed to help nurses explore corporate and alternative healthcare opportunities, access career guidance, discover job opportunities, and grow alongside like-minded professionals.<br><br>Whether you're considering a career transition or simply looking for support and direction, this community is here to guide and empower you every step of the way.</p>
+    <div class="community-perks">
+      <div class="perk">
+        <div class="perk-icon">💼</div>
+        <div class="perk-text">
+          <strong>Career Guidance</strong>
+          <span>Expert support for transitioning out of bedside nursing into alternative and corporate roles.</span>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🔍</div>
+        <div class="perk-text">
+          <strong>Job Opportunities</strong>
+          <span>Exclusive job leads and opportunities shared directly inside the community group.</span>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🤝</div>
+        <div class="perk-text">
+          <strong>Peer Support Network</strong>
+          <span>Connect with 100+ nurses navigating the same journey — you're not alone.</span>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">📚</div>
+        <div class="perk-text">
+          <strong>Ongoing Resources</strong>
+          <span>Continuous career guidance, tools, and resources to help you grow.</span>
+        </div>
+      </div>
+    </div>
+    <a href="https://wa.me/27783308935" class="btn-primary" target="_blank" rel="noopener">Join the Community on WhatsApp ↗</a>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="reveal">
+    <span class="section-tag">Thari Packages</span>
+    <h2 class="section-title">Everything you need to<br><em>step into your next chapter</em></h2>
+    <p class="section-intro">Professional packages designed to present you as the standout candidate you already are.</p>
+  </div>
+  <div class="packages-grid reveal">
+
+    <!-- Basic CV -->
+    <div class="pkg-card">
+      <div class="pkg-body">
+        <div class="pkg-num">Package 01</div>
+        <h3>Basic CV Package</h3>
+        <p class="pkg-tagline">Present a professional, standout profile that gets noticed.</p>
+        <div class="pkg-price">R200 <span>once-off</span></div>
+        <ul class="pkg-features">
+          <li>Modern CV — Clean, polished & recruiter-ready (photo option available)</li>
+          <li>ATS-Friendly CV — Optimised for online applications</li>
+          <li>Professional Cover Letter — Tailored to strengthen your application</li>
+        </ul>
+        <div class="pkg-bonus">
+          <strong>Bonus — All packages include:</strong>
+          Access to the WhatsApp community group · Thari Saturday Class sessions
+        </div>
+        <a href="https://wa.me/27783308935" class="btn-pkg btn-pkg-outline" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+      </div>
+    </div>
+
+    <!-- CV + LinkedIn -->
+    <div class="pkg-card featured">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-body">
+        <div class="pkg-num">Package 02</div>
+        <h3>CV + LinkedIn Package</h3>
+        <p class="pkg-tagline">Build your personal brand and attract new opportunities.</p>
+        <div class="pkg-price">R280 <span>once-off</span></div>
+        <ul class="pkg-features">
+          <li>Modern CV — Clean & recruiter-ready (photo option available)</li>
+          <li>ATS-Friendly CV — Optimised for online applications</li>
+          <li>LinkedIn Revamp — Professionally written for better visibility</li>
+          <li>Cover Letter — Tailored to strengthen your application</li>
+          <li>Bonus: LinkedIn tips & tricks</li>
+        </ul>
+        <div class="pkg-bonus">
+          <strong>Bonus — All packages include:</strong>
+          Access to the WhatsApp community group · Thari Saturday Class sessions
+        </div>
+        <a href="https://wa.me/27783308935" class="btn-pkg btn-pkg-gold" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+      </div>
+    </div>
+
+    <!-- Thari Coaching -->
+    <div class="pkg-card">
+      <div class="pkg-badge" style="background:var(--brown);">The Thari Coaching Package</div>
+      <div class="pkg-body">
+        <div class="pkg-num">Package 03</div>
+        <h3>Coaching Package</h3>
+        <p class="pkg-tagline">Includes digital workbook + workshop. Complete career transformation.</p>
+        <div class="pkg-price">R1,000 <span>full package</span></div>
+        <ul class="pkg-features">
+          <li>4-Week Career Transition Programme (structured & guided)</li>
+          <li>Saturday Workshop: from bedside to corporate</li>
+          <li>Alternative healthcare career paths exploration</li>
+          <li>Step-by-step digital workbook</li>
+          <li>ATS-compliant CV (Word + PDF format)</li>
+          <li>Modern professional CV redesign</li>
+          <li>Tailored cover letter for your target role</li>
+          <li>Full LinkedIn profile optimisation</li>
+          <li>1 group coaching session (Saturday class)</li>
+          <li>Access to Thari support community</li>
+          <li>Job opportunities shared inside the group</li>
+          <li>Ongoing career guidance & resources</li>
+        </ul>
+        <a href="https://wa.me/27783308935" class="btn-pkg btn-pkg-outline" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="careers-intro-row reveal">
+    <div>
+      <span class="section-tag">Alternative Careers</span>
+      <h2 class="section-title">Where could your<br>career <em>take you?</em></h2>
+    </div>
+    <p class="section-intro">Your nursing degree opens more doors than you think. Click any role to explore requirements and how to get started.</p>
+  </div>
+
+  <div class="career-tabs reveal">
+    <button class="tab-btn active" onclick="filterCareers('all', this)">All Roles</button>
+    <button class="tab-btn" onclick="filterCareers('non-bedside', this)">Non-Bedside</button>
+    <button class="tab-btn" onclick="filterCareers('maternal', this)">Maternal & Wellness</button>
+    <button class="tab-btn" onclick="filterCareers('remote', this)">Flexible & Remote</button>
+  </div>
+
+  <div class="careers-grid reveal" id="careersGrid">
+    <div class="career-card" data-category="non-bedside">
+      <div class="career-icon">📋</div>
+      <h3>Case Management</h3>
+      <p>Coordinate patient care and resources across healthcare settings, ensuring continuity and quality outcomes.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Registered Nurse (RN) qualification</li><li>2–3 years clinical experience</li><li>Strong communication skills</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Obtain Case Management Certification (CCM)</li><li>Network with hospital discharge teams</li><li>Apply to managed care organisations</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="non-bedside">
+      <div class="career-icon">🏥</div>
+      <h3>Pre-Authorisation Nurse</h3>
+      <p>Review and approve medical procedures for medical aid schemes — fully office-based.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>RN with clinical background</li><li>Knowledge of ICD-10 codes</li><li>Medical aid scheme experience (advantageous)</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Apply directly to medical aid schemes (Discovery, Medimed, etc.)</li><li>Highlight clinical assessment skills on your CV</li><li>Consider a short coding course</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="non-bedside">
+      <div class="career-icon">💻</div>
+      <h3>Telehealth Nurse</h3>
+      <p>Provide clinical support, triage, and patient education remotely via phone or video consultation.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Active nursing licence</li><li>Reliable internet connection</li><li>Comfortable with digital tools</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Apply to telehealth platforms (Healtheon, HealthForce)</li><li>Build a home office setup</li><li>Book a consultation with Thari Nurses for guidance</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="maternal">
+      <div class="career-icon">🤱</div>
+      <h3>Doula</h3>
+      <p>Provide emotional, physical, and informational support to mothers before, during, and after childbirth.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>No nursing licence required (but advantageous)</li><li>Doula certification program</li><li>Passion for maternal support</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Complete an accredited Doula training course</li><li>Attend births with an experienced doula</li><li>Register with DONA or SAPC</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="maternal">
+      <div class="career-icon">🍼</div>
+      <h3>Lactation Consultant</h3>
+      <p>Support new mothers with breastfeeding challenges in hospitals, clinics, or private practice.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Health background preferred</li><li>IBCLC certification (international)</li><li>Clinical lactation hours</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Accumulate required clinical hours</li><li>Study for the IBCLC exam</li><li>Partner with hospitals or open private practice</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="remote">
+      <div class="career-icon">🌐</div>
+      <h3>Virtual Nurse</h3>
+      <p>Work entirely from home providing patient education, chronic disease management, and follow-up care.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Active SANC registration</li><li>Strong clinical background</li><li>Good internet and computer skills</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Browse remote job boards (LinkedIn, PNet)</li><li>Set up a professional home office</li><li>Update your LinkedIn with remote-ready skills</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="remote">
+      <div class="career-icon">✍️</div>
+      <h3>Medical Writer</h3>
+      <p>Create clinical content, patient education materials, articles, and health marketing copy.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Clinical background (your greatest asset)</li><li>Strong written communication</li><li>Portfolio of writing samples</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Start a health blog to build your portfolio</li><li>Pitch to health publications</li><li>Freelance on platforms like Upwork</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="remote">
+      <div class="career-icon">💪</div>
+      <h3>Health Coach</h3>
+      <p>Help clients achieve wellness goals through lifestyle guidance, nutrition, and chronic disease prevention.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>Nursing background is a huge advantage</li><li>Health coaching certification (IIN or similar)</li><li>Entrepreneurial mindset</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Enrol in a recognised health coaching course</li><li>Build a social media presence</li><li>Offer free sessions to early clients</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="career-card" data-category="non-bedside">
+      <div class="career-icon">🎓</div>
+      <h3>Nurse Educator / Trainer</h3>
+      <p>Train the next generation of healthcare professionals in clinical and corporate settings.</p>
+      <button class="expand-btn" onclick="toggleCard(this)">Learn more ↓</button>
+      <div class="career-details">
+        <div class="career-detail-section">
+          <h5>Requirements</h5>
+          <ul><li>RN with 3+ years clinical experience</li><li>Teaching qualification or experience</li><li>Subject matter expertise</li></ul>
+        </div>
+        <div class="career-detail-section">
+          <h5>How to get started</h5>
+          <ul><li>Apply to nursing colleges and healthcare companies</li><li>Obtain a teaching or facilitation certification</li><li>Develop training materials</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <span class="section-tag">Work With Us</span>
+    <h2 class="section-title">Services designed to<br><em>move you forward</em></h2>
+    <p class="section-intro">Personalised support to help you navigate your career transition with confidence.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <h3>1:1 Career Consultation</h3>
+      <p>A focused session to explore your options, identify your strengths, and map out a clear career transition plan tailored to you.</p>
+      <a href="https://wa.me/27783308935" class="svc-link" target="_blank" rel="noopener">Request a Quote ↗</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <h3>CV Revamp</h3>
+      <p>Professional reformatting and rewriting of your CV to highlight your clinical skills for non-bedside and corporate roles.</p>
+      <a href="https://wa.me/27783308935" class="svc-link" target="_blank" rel="noopener">Request a Quote ↗</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <h3>Interview Preparation</h3>
+      <p>Mock interviews and coaching to help you articulate your nursing experience confidently in any professional setting.</p>
+      <a href="https://wa.me/27783308935" class="svc-link" target="_blank" rel="noopener">Request a Quote ↗</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <h3>LinkedIn Optimisation</h3>
+      <p>Transform your LinkedIn profile to attract recruiters, reflect your professional brand, and open doors to new opportunities.</p>
+      <a href="https://wa.me/27783308935" class="svc-link" target="_blank" rel="noopener">Request a Quote ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- COACHING PACKAGE FEATURE -->
+<section id="coaching">
+  <div class="coaching-inner reveal">
+    <div class="coaching-text">
+      <span class="section-tag">The Thari Coaching Package</span>
+      <h2 class="section-title">A complete 4-week<br><em>career transformation</em></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8; margin-bottom:2rem;">A structured guided programme for nurses ready to make the leap — from bedside to corporate and alternative healthcare roles. Includes everything you need to present, position, and propel yourself forward.</p>
+      <div class="coaching-features">
+        <div class="coaching-feature">
+          <div class="cf-icon">📖</div>
+          <div class="cf-text">
+            <strong>4-Week Guided Programme</strong>
+            <span>Structured weekly content covering career exploration, personal branding, job applications, and mindset.</span>
+          </div>
+        </div>
+        <div class="coaching-feature">
+          <div class="cf-icon">🗓️</div>
+          <div class="cf-text">
+            <strong>Saturday Workshop</strong>
+            <span>From bedside to corporate — interactive workshop sessions every Saturday.</span>
+          </div>
+        </div>
+        <div class="coaching-feature">
+          <div class="cf-icon">👥</div>
+          <div class="cf-text">
+            <strong>Group Coaching & Community</strong>
+            <span>Peer support network, job opportunities, and ongoing resources inside the Thari community.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="coaching-card">
+      <div class="coaching-card-badge">Full Package · R1,000</div>
+      <h3>The Thari Coaching Package</h3>
+      <p style="font-size:0.8rem; color:rgba(232,213,183,0.5); margin-bottom:0.8rem;">Includes digital workbook + workshop</p>
+      <div class="coaching-card-price">R1,000 <small>once-off</small></div>
+      <div class="coaching-includes">
+        <div class="ci-item">4-Week Programme</div>
+        <div class="ci-item">Saturday Workshop</div>
+        <div class="ci-item">ATS-Compliant CV</div>
+        <div class="ci-item">Cover Letter</div>
+        <div class="ci-item">LinkedIn Optimisation</div>
+        <div class="ci-item">Digital Workbook</div>
+        <div class="ci-item">Group Coaching</div>
+        <div class="ci-item">Community Access</div>
+        <div class="ci-item">Job Opportunities</div>
+        <div class="ci-item">Career Guidance</div>
+      </div>
+      <a href="https://wa.me/27783308935" class="btn-pkg btn-pkg-gold" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner">
+  <div class="reveal">
+    <span class="section-tag">Advertise & Collaborate</span>
+    <h2 class="section-title">Partner with <em>Thari Beyond</em><br>& reach your audience</h2>
+  </div>
+  <div class="partner-grid reveal">
+    <div>
+      <p class="partner-intro-text">Hi, I'm Sister Lesego — a registered nurse, midwife, and content creator behind <strong>Thari Beyond</strong>. I work with healthcare companies, training providers, and nursing-adjacent brands to create promotional content that reaches a highly engaged nursing audience.</p>
+      <p class="partner-intro-text">I've previously collaborated with <strong>First Training</strong>, <strong>Nurses Vision Holds Power and Support</strong>, nursing agencies, and recruiters — creating content that connects brands directly with nurses at every stage of their career.</p>
+
+      <div class="partner-stats">
+        <div class="p-stat">
+          <span class="p-stat-num">1,500</span>
+          <span class="p-stat-label">Live viewers / session</span>
+        </div>
+        <div class="p-stat">
+          <span class="p-stat-num">2×</span>
+          <span class="p-stat-label">Lives / week</span>
+        </div>
+        <div class="p-stat">
+          <span class="p-stat-num">1 mo</span>
+          <span class="p-stat-label">Video pinned</span>
+        </div>
+      </div>
+
+      <div class="live-block">
+        <div class="live-dot-wrap"><div class="live-indicator"></div></div>
+        <p>Every <strong>Tuesday & Thursday at 8 PM</strong>, Sister Lesego hosts live "chat & chill" sessions on TikTok covering business opportunities, alternative nursing careers, and professional development — reaching approximately <strong>1,500 viewers</strong> per session. Your brand can join as a guest to interact directly with the audience.</p>
+      </div>
+
+      <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.8rem; letter-spacing:0.08em; text-transform:uppercase;">Previous collaborations</p>
+      <div class="partner-tags-row">
+        <span class="ptag">First Training</span>
+        <span class="ptag">Nurses Vision Holds Power & Support</span>
+        <span class="ptag">Nursing Agencies</span>
+        <span class="ptag">Healthcare Recruiters</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="partner-pkg">
+        <div class="partner-pkg-badge">Once-off Promotional Package</div>
+        <h3>Brand Promotion</h3>
+        <p style="font-size:0.8rem; color:rgba(232,213,183,0.5); margin-bottom:0.5rem;">Reach a highly engaged nursing audience</p>
+        <div class="partner-pkg-price">R500 <span>once-off</span></div>
+        <ul>
+          <li>1 custom promotional video — tailored to your brand or adapted from your script</li>
+          <li>You receive a copy of the video to use on your own platforms</li>
+          <li>Video pinned on TikTok for 1 full month</li>
+          <li>Shared weekly on TikTok stories throughout the month</li>
+          <li>Live session feature on Tuesday or Thursday at 8 PM (~1,500 viewers)</li>
+          <li>TikTok insights shared on request</li>
+        </ul>
+        <a href="https://wa.me/27783308935" class="btn-pkg btn-pkg-gold" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+        <p style="font-size:0.7rem; color:rgba(232,213,183,0.25); text-align:center; margin-top:0.8rem;">Content tailored to align with your brand goals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <span class="section-tag">Client Stories</span>
+    <h2 class="section-title">Nurses who made<br>the <em>leap</em></h2>
+    <p class="section-intro">Real experiences from nurses who took the step toward a new chapter.</p>
+  </div>
+  <div class="testimonials-grid reveal">
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I had no idea my clinical background was so transferable. After my consultation, I had a clear plan — and within 3 months I landed a pre-auth role at a leading medical aid."</blockquote>
+      <div class="tcard-author">
+        <div class="avatar">NM</div>
+        <div class="author-info">
+          <strong>Nomsa M.</strong>
+          <span>ICU Nurse → Pre-Auth Nurse</span>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <blockquote>"The CV revamp was life-changing. I had been applying for months with no response. Within two weeks of the new CV, I had three interviews booked."</blockquote>
+      <div class="tcard-author">
+        <div class="avatar">LK</div>
+        <div class="author-info">
+          <strong>Lerato K.</strong>
+          <span>Ward Nurse → Health Coach</span>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I was completely burnt out and thought I had to leave nursing entirely. Thari Beyond helped me find a remote telehealth job that reignited my love for the profession."</blockquote>
+      <div class="tcard-author">
+        <div class="avatar">ZP</div>
+        <div class="author-info">
+          <strong>Zanele P.</strong>
+          <span>ER Nurse → Virtual Nurse</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK COMING SOON -->
+<section id="book">
+  <div class="book-inner reveal">
+    <div class="book-coming-label">Coming Soon</div>
+    <h2 class="book-title-display">A book written<br>for nurses like <em>you</em></h2>
+    <p class="book-desc">Sister Lesego is writing a book — a practical, honest, and empowering guide for nurses ready to discover the world beyond the bedside. From burnout to breakthrough, this book will walk with you every step of the way.</p>
+
+    <div class="book-mockup">
+      <svg width="320" height="444" viewBox="0 0 680 900" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(-14px 10px 32px rgba(14,9,3,0.32)) drop-shadow(4px 6px 16px rgba(14,9,3,0.14)); display:block; margin:0 auto;">
+        <defs>
+          <linearGradient id="coverBg" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0%" stop-color="#1c110a"/>
+            <stop offset="55%" stop-color="#241609"/>
+            <stop offset="100%" stop-color="#160d06"/>
+          </linearGradient>
+          <linearGradient id="spineShad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0a0603"/>
+            <stop offset="100%" stop-color="#1c110a"/>
+          </linearGradient>
+          <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e8c98a"/>
+            <stop offset="50%" stop-color="#c9a055"/>
+            <stop offset="100%" stop-color="#b8924a"/>
+          </linearGradient>
+          <linearGradient id="goldH" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#e8c98a"/>
+            <stop offset="50%" stop-color="#c9a055"/>
+            <stop offset="100%" stop-color="#b8924a"/>
+          </linearGradient>
+          <linearGradient id="shimmer" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f5e2c0" stop-opacity="0.18"/>
+            <stop offset="50%" stop-color="#c9a055" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#f5e2c0" stop-opacity="0.12"/>
+          </linearGradient>
+          <radialGradient id="glow" cx="50%" cy="42%" r="42%">
+            <stop offset="0%" stop-color="#c9a055" stop-opacity="0.09"/>
+            <stop offset="100%" stop-color="#c9a055" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Spine -->
+        <rect x="100" y="30" width="28" height="840" rx="3" fill="url(#spineShad)"/>
+        <rect x="126" y="30" width="454" height="840" rx="4" fill="url(#coverBg)"/>
+        <rect x="126" y="30" width="454" height="840" rx="4" fill="url(#shimmer)"/>
+        <rect x="126" y="30" width="454" height="840" rx="4" fill="url(#glow)"/>
+        <line x1="128" y1="30" x2="128" y2="870" stroke="#c9a055" stroke-width="0.6" opacity="0.35"/>
+        <rect x="100" y="30" width="6" height="840" rx="2" fill="#2e1e10" opacity="0.7"/>
+        <!-- Frame -->
+        <rect x="148" y="52" width="410" height="796" rx="2" fill="none" stroke="#c9a055" stroke-width="0.8" opacity="0.35"/>
+        <rect x="154" y="58" width="398" height="784" rx="2" fill="none" stroke="#c9a055" stroke-width="0.3" opacity="0.2"/>
+        <!-- Corner ornaments -->
+        <line x1="148" y1="72" x2="148" y2="52" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><line x1="148" y1="52" x2="168" y2="52" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><circle cx="148" cy="52" r="2.5" fill="#c9a055" opacity="0.7"/>
+        <line x1="558" y1="72" x2="558" y2="52" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><line x1="558" y1="52" x2="538" y2="52" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><circle cx="558" cy="52" r="2.5" fill="#c9a055" opacity="0.7"/>
+        <line x1="148" y1="828" x2="148" y2="848" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><line x1="148" y1="848" x2="168" y2="848" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><circle cx="148" cy="848" r="2.5" fill="#c9a055" opacity="0.7"/>
+        <line x1="558" y1="828" x2="558" y2="848" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><line x1="558" y1="848" x2="538" y2="848" stroke="#c9a055" stroke-width="1.2" opacity="0.7"/><circle cx="558" cy="848" r="2.5" fill="#c9a055" opacity="0.7"/>
+        <!-- Coming soon banner -->
+        <rect x="285" y="68" width="136" height="20" rx="10" fill="none" stroke="#c9a055" stroke-width="0.7" opacity="0.55"/>
+        <text x="353" y="81.5" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#c9a055" letter-spacing="3.5" opacity="0.8">COMING SOON</text>
+        <!-- Top botanical leaves left -->
+        <g opacity="0.6">
+          <path d="M170,100 Q145,138 158,170 Q175,145 180,112 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.7" opacity="0.8"/>
+          <path d="M170,100 Q158,138 158,170" fill="none" stroke="#c9a055" stroke-width="0.5" opacity="0.6"/>
+          <path d="M186,88 Q168,108 172,132 Q188,114 192,94 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.6" opacity="0.7"/>
+          <path d="M196,78 Q184,95 186,115 Q196,100 200,84 Z" fill="#2e1e10" stroke="#c9a055" stroke-width="0.5" opacity="0.6"/>
+          <path d="M205,72 Q190,95 170,100 Q160,140 158,170" fill="none" stroke="#c9a055" stroke-width="0.7" opacity="0.45"/>
+        </g>
+        <!-- Top botanical leaves right -->
+        <g opacity="0.6" transform="scale(-1,1) translate(-706,0)">
+          <path d="M170,100 Q145,138 158,170 Q175,145 180,112 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.7" opacity="0.8"/>
+          <path d="M170,100 Q158,138 158,170" fill="none" stroke="#c9a055" stroke-width="0.5" opacity="0.6"/>
+          <path d="M186,88 Q168,108 172,132 Q188,114 192,94 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.6" opacity="0.7"/>
+          <path d="M196,78 Q184,95 186,115 Q196,100 200,84 Z" fill="#2e1e10" stroke="#c9a055" stroke-width="0.5" opacity="0.6"/>
+          <path d="M205,72 Q190,95 170,100 Q160,140 158,170" fill="none" stroke="#c9a055" stroke-width="0.7" opacity="0.45"/>
+        </g>
+        <!-- Logo circle -->
+        <circle cx="353" cy="370" r="168" fill="none" stroke="#c9a055" stroke-width="1.3" opacity="0.6"/>
+        <circle cx="353" cy="370" r="156" fill="none" stroke="#c9a055" stroke-width="0.5" opacity="0.25"/>
+        <circle cx="353" cy="370" r="168" fill="#c9a055" fill-opacity="0.025"/>
+        <!-- TB monogram -->
+        <text x="320" y="398" font-family="Georgia,serif" font-size="152" font-weight="700" fill="#fdf8f4" opacity="0.96" text-anchor="middle" letter-spacing="-4">T</text>
+        <text x="388" y="422" font-family="Georgia,serif" font-size="124" font-weight="400" fill="#c9a882" opacity="0.45" text-anchor="middle">B</text>
+        <!-- 8-point gold star -->
+        <g transform="translate(493, 228)">
+          <line x1="0" y1="-24" x2="0" y2="24" stroke="url(#goldV)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="-24" y1="0" x2="24" y2="0" stroke="url(#goldH)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="-14" y1="-14" x2="14" y2="14" stroke="url(#goldV)" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="14" y1="-14" x2="-14" y2="14" stroke="url(#goldH)" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="2.5" fill="#e8c98a"/>
+        </g>
+        <!-- Small accent stars -->
+        <g transform="translate(192,252)" opacity="0.5"><line x1="0" y1="-8" x2="0" y2="8" stroke="#c9a055" stroke-width="1" stroke-linecap="round"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#c9a055" stroke-width="1" stroke-linecap="round"/><line x1="-5" y1="-5" x2="5" y2="5" stroke="#c9a055" stroke-width="0.7" stroke-linecap="round"/><line x1="5" y1="-5" x2="-5" y2="5" stroke="#c9a055" stroke-width="0.7" stroke-linecap="round"/></g>
+        <g transform="translate(175,438)" opacity="0.35"><line x1="0" y1="-5" x2="0" y2="5" stroke="#c9a055" stroke-width="0.8"/><line x1="-5" y1="0" x2="5" y2="0" stroke="#c9a055" stroke-width="0.8"/></g>
+        <g transform="translate(530,310)" opacity="0.35"><line x1="0" y1="-5" x2="0" y2="5" stroke="#c9a055" stroke-width="0.8"/><line x1="-5" y1="0" x2="5" y2="0" stroke="#c9a055" stroke-width="0.8"/></g>
+        <!-- Gold rule + dot -->
+        <line x1="230" y1="560" x2="318" y2="560" stroke="#c9a055" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="353" cy="560" r="2.8" fill="#c9a055" opacity="0.7"/>
+        <line x1="388" y1="560" x2="476" y2="560" stroke="#c9a055" stroke-width="0.8" opacity="0.6"/>
+        <!-- Title -->
+        <text x="353" y="600" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#fdf8f4" text-anchor="middle" letter-spacing="6" opacity="0.97">THARI BEYOND</text>
+        <!-- Tagline -->
+        <text x="353" y="628" font-family="Georgia,serif" font-size="11" fill="#c9a882" text-anchor="middle" letter-spacing="3.2" opacity="0.8">— NURSES BEYOND THE BEDSIDE —</text>
+        <text x="353" y="646" font-family="Georgia,serif" font-size="10.5" fill="#c9a882" text-anchor="middle" letter-spacing="3.2" opacity="0.65">TOWARDS THE FUTURE</text>
+        <!-- Bottom botanical left -->
+        <g opacity="0.55">
+          <path d="M195,780 Q168,750 172,720 Q192,744 200,774 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.7" opacity="0.8"/>
+          <path d="M195,780 Q180,750 172,720" fill="none" stroke="#c9a055" stroke-width="0.5" opacity="0.55"/>
+          <path d="M210,792 Q188,758 196,728 Q214,754 218,786 Z" fill="#2e1e10" stroke="#c9a055" stroke-width="0.6" opacity="0.7"/>
+          <path d="M178,795 Q158,768 164,740 Q182,762 186,790 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.6" opacity="0.65"/>
+        </g>
+        <!-- Bottom botanical right -->
+        <g opacity="0.55" transform="scale(-1,1) translate(-706,0)">
+          <path d="M195,780 Q168,750 172,720 Q192,744 200,774 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.7" opacity="0.8"/>
+          <path d="M195,780 Q180,750 172,720" fill="none" stroke="#c9a055" stroke-width="0.5" opacity="0.55"/>
+          <path d="M210,792 Q188,758 196,728 Q214,754 218,786 Z" fill="#2e1e10" stroke="#c9a055" stroke-width="0.6" opacity="0.7"/>
+          <path d="M178,795 Q158,768 164,740 Q182,762 186,790 Z" fill="#3d2a18" stroke="#c9a055" stroke-width="0.6" opacity="0.65"/>
+        </g>
+        <!-- Cupped hands + heart -->
+        <g transform="translate(353, 720)" opacity="0.75">
+          <path d="M-52,-18 Q-70,-6 -66,12 Q-58,30 -38,38 Q-22,44 -6,36" fill="none" stroke="#c9a882" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M-6,36 Q4,42 10,36" fill="none" stroke="#c9a882" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M52,-18 Q70,-6 66,12 Q58,30 38,38 Q22,44 6,36" fill="none" stroke="#c9a882" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6,36 Q-4,42 -10,36" fill="none" stroke="#c9a882" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M0,14 C0,14 -14,-2 -14,-10 C-14,-20 -5,-24 0,-17 C5,-24 14,-20 14,-10 C14,-2 0,14 0,14 Z" fill="url(#goldV)" opacity="0.9"/>
+        </g>
+        <!-- Author -->
+        <line x1="280" y1="818" x2="426" y2="818" stroke="#c9a055" stroke-width="0.5" opacity="0.35"/>
+        <text x="353" y="837" font-family="Georgia,serif" font-size="11" fill="#c9a882" text-anchor="middle" letter-spacing="2.5" opacity="0.7">Sister Lesego</text>
+        <line x1="280" y1="848" x2="426" y2="848" stroke="#c9a055" stroke-width="0.5" opacity="0.35"/>
+      </svg>
+    </div>
+
+    <div class="book-notify-box">
+      <h4>Be the first to know</h4>
+      <p>Leave your email and we'll notify you the moment the book drops.</p>
+      <div class="book-notify-row">
+        <input type="email" class="book-notify-input" placeholder="your@email.com" id="bookEmail">
+        <button class="btn-notify" onclick="handleBookNotify()">Notify Me</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-tag">Get In Touch</span>
+  <h2 class="section-title">Ready to take the<br><em>first step?</em></h2>
+
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-intro">Whether you're ready to book a consultation or just want to ask a question, reach out via WhatsApp for the fastest response. Based in Johannesburg, Florida Roodepoort.</p>
+
+      <a href="https://wa.me/27783308935" class="contact-opt" target="_blank" rel="noopener">
+        <div class="contact-opt-icon">💬</div>
+        <div class="contact-opt-text">
+          <strong>WhatsApp — 078 330 8935</strong>
+          <span>Fastest way to reach us — click to chat</span>
+        </div>
+      </a>
+      <a href="https://wa.me/27736025087" class="contact-opt" target="_blank" rel="noopener">
+        <div class="contact-opt-icon">📱</div>
+        <div class="contact-opt-text">
+          <strong>WhatsApp — 073 602 5087</strong>
+          <span>Alternative number</span>
+        </div>
+      </a>
+      <a href="mailto:lesegomichellerampage@gmail.com" class="contact-opt">
+        <div class="contact-opt-icon">✉️</div>
+        <div class="contact-opt-text">
+          <strong>Email Us</strong>
+          <span>lesegomichellerampage@gmail.com</span>
+        </div>
+      </a>
+      <a href="#partner" class="contact-opt">
+        <div class="contact-opt-icon">📅</div>
+        <div class="contact-opt-text">
+          <strong>Advertise / Collaborate</strong>
+          <span>TikTok partnership & brand promotion enquiries</span>
+        </div>
+      </a>
+    </div>
+
+    <div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>I'm Interested In</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Basic CV Package (R200)</option>
+            <option>CV + LinkedIn Package (R280)</option>
+            <option>Thari Coaching Package (R1,000)</option>
+            <option>1:1 Career Consultation</option>
+            <option>Interview Preparation</option>
+            <option>Brand Partnership / Advertising (R500)</option>
+            <option>Join the Community</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us a bit about where you are in your journey..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleSubmit(event)">Send Message ↗</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Thari Beyond</div>
+    <p>Nurses Beyond the Bedside · Towards the Future · Johannesburg, South Africa</p>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#community">Community</a>
+    <a href="#packages">Packages</a>
+    <a href="#careers">Careers</a>
+    <a href="#book">Book</a>
+    <a href="#partner">Partner</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Thari Beyond. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    const links = document.getElementById('navLinks');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '100%'; links.style.left = '0'; links.style.right = '0';
+    links.style.background = 'rgba(253,248,242,0.98)';
+    links.style.padding = '1.5rem 2rem';
+    links.style.borderBottom = '1px solid rgba(184,146,74,0.15)';
+    links.style.backdropFilter = 'blur(12px)';
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Career filter
+  function filterCareers(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.career-card').forEach(card => {
+      card.classList.toggle('hidden', cat !== 'all' && card.dataset.category !== cat);
+    });
+  }
+
+  // Toggle career card
+  function toggleCard(btn) {
+    const details = btn.nextElementSibling;
+    const isOpen = details.classList.toggle('open');
+    btn.textContent = isOpen ? 'Show less ↑' : 'Learn more ↓';
+  }
+
+  // Book notify
+  function handleBookNotify() {
+    const input = document.getElementById('bookEmail');
+    const btn = document.querySelector('.btn-notify');
+    if (!input.value) { input.focus(); return; }
+    btn.textContent = 'You\'re on the list! ✓';
+    btn.style.background = 'var(--brown-medium)';
+    input.value = '';
+    setTimeout(() => { btn.textContent = 'Notify Me'; btn.style.background = ''; }, 3000);
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = 'Message sent! ✓';
+    btn.style.background = 'var(--brown)';
+    setTimeout(() => {
+      btn.textContent = 'Send Message ↗';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
